@@ -2,10 +2,10 @@ import React from 'react';
 import GlobalStyle from '../GlobalStyle';
 const HeaderStyles = {
   width: '100%',
-  height: '50px',
+  height: '30px',
   display: 'flex',
   alignItems: 'center',
-  color: 'white',
+  color: 'black',
   fontWeight: '600',
   borderRadius: '5px 5px 5px 5px',
   sjustifyContent: 'center',
