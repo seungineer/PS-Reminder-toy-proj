@@ -52,7 +52,7 @@ return (
 
 function Layout({ children }) {
 return (
-    <div style={{ border: '1px solid black', borderRadius: '10px', padding: "10px"}}> {/* Added padding for visual appeal */}
+    <div style={{ border: '1px solid black', borderRadius: '10px', padding: "10px"}}>
         <GlobalStyle />
         <Header />
         <div style={{ ...layoutStyles }}>
