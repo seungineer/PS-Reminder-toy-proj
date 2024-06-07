@@ -8,7 +8,7 @@ const HeaderStyles = {
   color: 'black',
   fontWeight: '600',
   borderRadius: '5px 5px 5px 5px',
-  sjustifyContent: 'center',
+  justifyContent: 'center',
 
 };
 const FooterStyles = {
@@ -52,7 +52,7 @@ return (
 
 function Layout({ children }) {
 return (
-    <div style={{ border: '1px solid black', borderRadius: '10px', paddingTop: '20px', paddingBottom: '20px', paddingLeft: '10px', paddingRight: '10px'}}> {/* Added padding for visual appeal */}
+    <div style={{ border: '1px solid black', borderRadius: '10px', padding: "10px"}}> {/* Added padding for visual appeal */}
         <GlobalStyle />
         <Header />
         <div style={{ ...layoutStyles }}>
