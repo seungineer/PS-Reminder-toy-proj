@@ -5,7 +5,7 @@ import React from 'react';
 // 사용자 로그인 정보에 따라 props 변경될 수 있음
 function BulletBoard({ posts }) {
     return (
-      <div className="flex w-full flex-wrap justify-center gap-4 p-4">
+      <div className="flex w-full flex-wrap-reverse justify-center gap-4 p-4">
         {posts.map((post) => (
           <div 
             key={post.id} // map 함수 사용 시 key prop 필수
