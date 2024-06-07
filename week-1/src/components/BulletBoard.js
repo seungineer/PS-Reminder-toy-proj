@@ -12,8 +12,8 @@ import { useRecoilState } from 'recoil';
 
 // 사용자 로그인 정보에 따라 props 변경될 수 있음
 function BulletBoard({post}) {
-    const [subject, setSubject] = useState("");
-    const [content, setContent] = useState("");
+    const [subject, setSubject] = useState(post.subject);
+    const [content, setContent] = useState(post.content);
     console.log(post)
     const [isModify, setIsModify] = useState(false);
     const [posts, setPosts] = useRecoilState(postsState)
