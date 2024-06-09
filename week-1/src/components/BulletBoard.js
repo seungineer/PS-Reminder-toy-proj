@@ -44,8 +44,9 @@ function BulletBoard({post}) {
         {/* 제목, 내용 표시(수정일 때, 아닐 때) */}
         {isModify ? (
             <>
-            <input onChange={(e) => {setSubject(e.target.value)}} className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white" defaultValue={post.subject}></input>
-            <input onChange={(e) => {setContent(e.target.value)}} className="mb-3 text-sm font-light text-gray-700 dark:text-gray-400" defaultValue={post.content}></input></>
+            <input onChange={(e) => {setSubject(e.target.value)}} className="block mt-0.5 p-2.5 w-full text-lg font-bold text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" defaultValue={post.subject}></input>
+            <textarea rows="3" onChange={(e) => {setContent(e.target.value)}} className="block mt-0.5 mb-1.5 p-2.5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" defaultValue={post.content}></textarea>
+            </>
         ) : (<>
             <h1 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{post.subject}</h1>
             <p className="mb-3 text-sm font-light text-gray-700 dark:text-gray-400">{post.content}</p></>)
