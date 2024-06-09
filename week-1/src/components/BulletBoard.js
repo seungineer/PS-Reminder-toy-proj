@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { postsState } from '../pages/Home';
+import { postsState } from '../shared/Store';
 import { useRecoilState } from 'recoil';
 
 // setPosts 함수를 불러와서 수정할 수도 있지만,
@@ -54,7 +54,7 @@ function BulletBoard({post}) {
         {/* 버튼 표시(수정일 때, 아닐 때) */}
         {isModify ? (
             <>
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-start gap-2">
               <a // 수정 버튼에 게시물 ID 전달
                 href={`/post/${post.id}/edit`} 
                 className="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -75,7 +75,7 @@ function BulletBoard({post}) {
               </div>
             </>
         ) : ( <>
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-start gap-2">
               <a // 수정 버튼에 게시물 ID 전달
                 href={`/post/${post.id}/edit`} 
                 className="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
