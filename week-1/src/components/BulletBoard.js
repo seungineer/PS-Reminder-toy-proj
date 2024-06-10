@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { postsState } from '../shared/Store';
+import { isRefreshState, postsState } from '../shared/Store';
 import { useRecoilState } from 'recoil';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // setPosts 함수를 불러와서 수정할 수도 있지만,
 // 이렇게 되면 어떤 컴포넌트에서 어떻게 수정되는지 복잡해지면서
@@ -12,28 +14,57 @@ import { useRecoilState } from 'recoil';
 
 // 사용자 로그인 정보에 따라 props 변경될 수 있음
 function BulletBoard({post}) {
-    const [subject, setSubject] = useState(post.subject);
+    const [title, setTitle] = useState(post.title);
     const [content, setContent] = useState(post.content);
     console.log(post)
     const [isModify, setIsModify] = useState(false);
     const [posts, setPosts] = useRecoilState(postsState)
-    
-    function onDeleteHandler(id) {
-      setPosts(posts.filter((post) => post.id !== id));
-    }
+    const [isRefresh, setIsRefresh] = useRecoilState(isRefreshState);
+    const navigate = useNavigate();
 
+    function onDeleteHandler(id) {
+      axios.delete(`${process.env.REACT_APP_REQUEST_URL}/api/post/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then(response => {
+        console.log("DELETE request successful!");
+        setIsRefresh(!isRefresh);
+      })
+      .catch(error => {
+        console.error("Error sending delete request:", error);
+      });
+    }
+    
+    
     function onModifyHandler() {
         setIsModify(true); 
     }
+    const newServerPost = {
+      "title": title,
+      "content":content,
+      "link":"test",
+      "category":"test",
+      "score":0,
+      "author" : "test", // 추가
+      "password": "test",
+    };
 
     const onSaveHandler = (id) => {
-        setPosts(prevPosts => {
-            const newPosts = [...prevPosts]; // Create a copy of the posts array
-            const index = newPosts.findIndex(post => post.id === id);
-            newPosts[index] = { id: index, subject: subject, content: content }; // Update the specific post
-            return newPosts;
+        axios.put(`${process.env.REACT_APP_REQUEST_URL}/api/post/${id}`, newServerPost, {
+            headers: {
+          Authorization: localStorage.getItem("token"),
+            },
+        })
+        .then(response => {
+            console.log("PUT request successful!");
+            setIsRefresh(!isRefresh);
+            setIsModify(false);
+        })
+        .catch(error => {
+            console.error("Error sending post request:", error);
         });
-        setIsModify(false);
     };
     
     return (
@@ -44,11 +75,11 @@ function BulletBoard({post}) {
         {/* 제목, 내용 표시(수정일 때, 아닐 때) */}
         {isModify ? (
             <>
-            <input onChange={(e) => {setSubject(e.target.value)}} className="block mt-0.5 p-2.5 w-full text-lg font-bold text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" defaultValue={post.subject}></input>
+            <input onChange={(e) => {setTitle(e.target.value)}} className="block mt-0.5 p-2.5 w-full text-lg font-bold text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" defaultValue={post.title}></input>
             <textarea rows="3" onChange={(e) => {setContent(e.target.value)}} className="block mt-0.5 mb-1.5 p-2.5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" defaultValue={post.content}></textarea>
             </>
         ) : (<>
-            <h1 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{post.subject}</h1>
+            <h1 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">{post.title}</h1>
             <p className="mb-3 text-sm font-light text-gray-700 dark:text-gray-400">{post.content}</p></>)
         }
         {/* 버튼 표시(수정일 때, 아닐 때) */}
@@ -104,5 +135,5 @@ function BulletBoard({post}) {
             </div>
             </>
     );
-}
+} 
 export default BulletBoard;
