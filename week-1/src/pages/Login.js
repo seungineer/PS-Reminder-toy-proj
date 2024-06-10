@@ -50,13 +50,13 @@ const Login = () => {
                     </label>
                 </div>
                 <div>
-                    <textarea
-                        id="패스워드"
+                    <input
+                        id="아이디"
                         onChange={onIdChangeHandler}
-                        rows="1"
                         className="block p-2.5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Writes the ids Here."
-                    ></textarea>
+                        type="text"
+                    ></input>
                 </div>
                 <div>
                     <label
@@ -67,13 +67,13 @@ const Login = () => {
                     </label>
                 </div>
                 <div>
-                    <textarea
+                    <input
                         id="message"
                         onChange={onPasswordChangeHandler}
-                        rows="1"
                         className="block mb-1.5 p-2.5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Writes the passwords Here."
-                    ></textarea>
+                        type="password"
+                    ></input>
                 </div>
                 <div style={{ display: "flex", justify: "center" }}>
                     <button

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";      
-import { postsState, tempdataState } from "../shared/Store";
+import { isRefreshState, postsState, tempdataState } from "../shared/Store";
 import { useNavigate } from "react-router-dom";
 import { SlArrowLeftCircle } from "react-icons/sl";
 import axios from "axios";
@@ -9,10 +9,14 @@ const WritePost = () => {
     // subject, content 상태값 추가
     const [subject, setSubject] = useState("");
     const [content, setContent] = useState("");
+    const idRef = useRef(useRecoilValue(postsState).length + 1);
+    
     const [posts, setPosts] = useRecoilState(postsState);
     const [tempdata, setTempdata] = useRecoilState(tempdataState);
-    const idRef = useRef(useRecoilValue(postsState).length + 1);
+    const [isRefresh, setIsRefresh] = useRecoilState(isRefreshState);
+    
     const navigate = useNavigate();
+
     const onSubjectChangeHandler = (e) => {
         setSubject(e.target.value);
     };
@@ -22,16 +26,6 @@ const WritePost = () => {
 
     const onPostClick = () => {
         console.log("post button clicked!");
-        const newPost = {
-            id: idRef.current,
-            "title":subject,
-            "content":content,
-            "link":"test",
-            "category":"test",
-            "score":0,
-            "author":"test",
-            "password":"test" 
-            };
         const newServerPost = {
             "title":subject,
             "content":content,
@@ -41,7 +35,6 @@ const WritePost = () => {
             "author":"test",
             "password":"test" 
             };
-        setPosts([...posts, newPost]);
         // 서버에 post 전송
         axios.post(`${process.env.REACT_APP_REQUEST_URL}/api/post`, newServerPost, {
             headers: {
@@ -51,13 +44,16 @@ const WritePost = () => {
             .then(response => {
             console.log("Post request successful!");
             // Handle the response if needed
+            setIsRefresh(!isRefresh);
             })
             .catch(error => {
             console.error("Error sending post request:", error);
             // Handle the error if needed
             });
         idRef.current += 1;
-        navigate("/Home");
+        
+        // setTempdata({"subject": "", "content": ""});
+        // navigate("/Home");
     };
 
     const onSaveClick = () => {

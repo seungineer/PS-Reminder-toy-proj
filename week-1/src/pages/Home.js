@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BulletBoard from "../components/BulletBoard";
 import { useRecoilState } from "recoil";
-import { postsState } from "../shared/Store";
+import { isRefreshState, postsState } from "../shared/Store";
 import { useNavigate } from "react-router-dom";
 import { SlPlus } from "react-icons/sl";
 import axios from 'axios';
 
 const Home = () => {
     // subject, content 상태값 추가
-    const [posts, setPosts] = useRecoilState(postsState)
+    const [isRefresh, setIsRefresh] = useRecoilState(isRefreshState);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
-  
-    
+
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_REQUEST_URL}/api/post`,{
             headers: {
@@ -22,32 +21,33 @@ const Home = () => {
         })   
         .then(response => {
             console.log("successfully loaded")
-            console.log(response.data.data.posts)
             setData(response.data.data.posts)
         })
         .catch(error => {
             setError(error);
         });
     }, []);
-;
-  
     
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_REQUEST_URL}/api/post`,{
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        })
+        .then(response => {
+            setData(response.data.data.posts)
+        })
+        .catch(error => {
+            setError(error);
+        });
+    }, [isRefresh]);
+  
     return (
         <>
-            {/* axios test */}
-            {/* {error && <div>Error: {error.message}</div>}
-            {(!data) && <div>Loading...</div>} */}
-            <div className="flex w-full flex-wrap justify-center gap-4 p-4">
-                {data.length > 0 ? (
-                    data.map((post) => <div key={post.id}>{post.title}</div>)
-                ) : (
-                    <div>게시물이 없습니다.</div>
-                )}
-            </div>
             {/* card 영역 */}
             <div className="flex w-full flex-wrap justify-center gap-4 p-4">
-                {posts.length > 0 ? (
-                    posts.map((post) => <BulletBoard post={post} setPosts={setPosts} />)
+                {data.length > 0 ? (
+                    data.sort((a,b) => b.id).map((post) => <BulletBoard post={post} setData={setData} />)
                 ) : (
                     <div>게시물이 없습니다.</div>
                 )}

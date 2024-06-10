@@ -13,5 +13,9 @@ const tempdataState = atom({
         ],
 });
 
+const isRefreshState = atom({
+    key: "isRefreshState",
+    default: false,
+});
 
-export { postsState, tempdataState };
+export { postsState, tempdataState, isRefreshState };
