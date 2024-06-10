@@ -59,12 +59,12 @@ function BulletBoard({post}) {
         })
         .then(response => {
             console.log("PUT request successful!");
+            setIsRefresh(!isRefresh);
+            setIsModify(false);
         })
         .catch(error => {
             console.error("Error sending post request:", error);
         });
-        setIsRefresh(!isRefresh);
-        setIsModify(false);
     };
     
     return (

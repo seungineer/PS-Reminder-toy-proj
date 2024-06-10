@@ -47,7 +47,7 @@ const Home = () => {
             {/* card 영역 */}
             <div className="flex w-full flex-wrap justify-center gap-4 p-4">
                 {data.length > 0 ? (
-                    data.sort((a,b) => b.id).map((post) => <BulletBoard post={post} setData={setData} />)
+                    data.sort((a,b) => b.id - a.id).map((post) => <BulletBoard post={post} setData={setData} />)
                 ) : (
                     <div>게시물이 없습니다.</div>
                 )}
