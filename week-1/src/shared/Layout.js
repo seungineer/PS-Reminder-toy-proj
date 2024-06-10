@@ -58,7 +58,7 @@ return (
         <div style={{ ...layoutStyles }}>
             {children}
         </div>
-        <Footer />
+        {/* <Footer /> */}
     </div>
 );
 }

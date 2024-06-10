@@ -52,8 +52,8 @@ const WritePost = () => {
             });
         idRef.current += 1;
         
-        // setTempdata({"subject": "", "content": ""});
-        // navigate("/Home");
+        setTempdata({"subject": "", "content": ""});
+        navigate("/Home");
     };
 
     const onSaveClick = () => {
