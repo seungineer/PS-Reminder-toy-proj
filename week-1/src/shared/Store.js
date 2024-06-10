@@ -7,4 +7,11 @@ const postsState = atom({
         { id: 2, subject: "subject 2", content: "contents 2" }],
 });
 
-export { postsState };
+const tempdataState = atom({
+    key: "tempdataState",
+    default: [
+        ],
+});
+
+
+export { postsState, tempdataState };

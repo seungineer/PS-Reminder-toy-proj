@@ -16,20 +16,18 @@ const Login = () => {
 
     const onLoginClick = () => {
         // 서버에 id와 password 전송
-        axios.post("http://43.201.17.0:8080/api/auth/login", {
+        axios.post(`${process.env.REACT_APP_REQUEST_URL}/api/auth/login`, {
             "username" : id,
             "password" : password,
         })
             .then((data) => {
             // 토큰 response 처리
-            const token = data.token;
+            const token = data.headers.authorization;
             // 토큰을 localStorage에 저장
             localStorage.setItem("token", token);
-            // 홈 페이지로 이동
             navigate("/Home");
             })
             .catch((error) => {
-            navigate("/Home");
             console.error("Error:", error);
             });
     };

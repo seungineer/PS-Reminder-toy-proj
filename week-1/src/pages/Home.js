@@ -13,22 +13,30 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
   
+    
     useEffect(() => {
-      axios.get('http://43.201.17.0:8080/')
+        axios.get(`${process.env.REACT_APP_REQUEST_URL}/api/post`,{
+            headers: {
+                Authorization: `${localStorage.getItem("token")}`,
+            },
+        })   
         .then(response => {
-          setData(response.data);
+            console.log("successfully loaded")
+            console.log(response.data.data.posts)
+            setData(response.data.data.posts)
         })
         .catch(error => {
-          setError(error);
+            setError(error);
         });
     }, []);
+;
   
     
     return (
         <>
             {/* axios test */}
-            {error && <div>Error: {error.message}</div>}
-            {(!data) && <div>Loading...</div>}
+            {/* {error && <div>Error: {error.message}</div>}
+            {(!data) && <div>Loading...</div>} */}
             <div className="flex w-full flex-wrap justify-center gap-4 p-4">
                 {data.length > 0 ? (
                     data.map((post) => <div key={post.id}>{post.title}</div>)
