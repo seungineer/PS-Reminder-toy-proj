@@ -59,14 +59,14 @@ const WritePost = () => {
             // Handle the error if needed
             });
         idRef.current += 1;
-        
+        alert("알고리즘 문제가 등록되었습니다.");
         setTempdata({"subject": "", "content": ""});
         navigate("/Home");
     };
 
     const onSaveClick = () => {
-        console.log("save button clicked!");
-        setTempdata({"subject": subject, "content": content});
+        setTempdata({"subject": subject, "content": content, "link": link, "category": category, "score": score});
+        alert("임시 저장되었습니다.");
     }
 
     const onLinkChangeHandler = (e) => {
@@ -187,7 +187,7 @@ const WritePost = () => {
                         rows="1"
                         className="block mb-4 p-2.5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder={linkPlaceholder}
-                        defaultValue={tempdata.subject}
+                        defaultValue={tempdata.link}
                     ></textarea>
                 </div>
 
