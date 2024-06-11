@@ -14,6 +14,6 @@
 3. 상태관리 툴(tool)을 활용해 임시 저장 기능 구현
 
 ## 화면 구성
-|문제 등록|오늘의 문제|
-|-------|--------|
-|<img width="307" alt="스크린샷 2024-06-11 오후 4 41 55" src="https://github.com/seungineer/react-toy-projcet/assets/97353541/2be64821-4785-4224-be25-4a4252cf475d">|<img width="293" alt="스크린샷 2024-06-11 오후 4 41 24" src="https://github.com/seungineer/react-toy-projcet/assets/97353541/e16d4957-2dfb-49cb-bb16-b44f3e1077ad"/>|
+|목록|문제 등록|오늘의 문제|
+|-------|-------|--------|
+|<img width="277" alt="image" src="https://github.com/seungineer/react-toy-projcet/assets/97353541/0c1bd693-c788-4392-8127-ddd27c499a6e">|<img width="307" alt="스크린샷 2024-06-11 오후 4 41 55" src="https://github.com/seungineer/react-toy-projcet/assets/97353541/2be64821-4785-4224-be25-4a4252cf475d">|<img width="293" alt="스크린샷 2024-06-11 오후 4 41 24" src="https://github.com/seungineer/react-toy-projcet/assets/97353541/e16d4957-2dfb-49cb-bb16-b44f3e1077ad"/>|
