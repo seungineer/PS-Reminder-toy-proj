@@ -11,16 +11,6 @@ const HeaderStyles = {
   justifyContent: 'center',
 
 };
-const FooterStyles = {
-  width: '100%',
-  height: '50px',
-  display: 'flex',
-  background: 'black',
-  color: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '6px',
-};
 
 const layoutStyles = {
     display: 'flex',
@@ -33,20 +23,9 @@ const layoutStyles = {
 function Header() {
   return (
     <div style={{ ...HeaderStyles }}>
-      <span>✏️ Simple memo</span>
+      <span>✏️ Algorithm review optimizer</span>
     </div>
   );
-}
-
-const MoveToTop = () => { // 위로 올라가기 함수
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-function Footer() {
-return (
-    <div style={{ ...FooterStyles }}>
-        <div onClick={MoveToTop} className='text-medium font-bold underline'>맨위로 올라가기</div>
-    </div>
-);
 }
 
 
@@ -58,7 +37,7 @@ return (
         <div style={{ ...layoutStyles }}>
             {children}
         </div>
-        <Footer />
+        {/* <Footer /> */}
     </div>
 );
 }
